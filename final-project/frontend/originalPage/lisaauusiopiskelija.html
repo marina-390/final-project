@@ -1,0 +1,112 @@
+<?php
+include "connect.php";
+
+?>
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Harjoitteluseuranta</title>
+  <a href="Harjoitteluseuranta.php"><button>Etusivu</button></a><br>
+</head>
+<body>
+
+  <h2>Harjoittelupaikat</h2>
+
+  <ul>
+    <li><a href="kirjaudu.php">Kirjaudu sisään</a></li>
+    <li><a href="lisaauusiopiskelija.php">Lisää uusi opiskelija</a></li>
+    
+  
+    <main>
+        <form method="POST" action="actionpage.php">
+            <fieldset>
+                <legend>Omat tiedot</legend>
+                <legend>Omat tiedot</legend>
+
+<label for="nimi">Nimi (pakollinen):</label>
+<select name="nimi" id="nimi" required>
+    <option value="">-- Valitse opiskelija --</option>
+    <?php
+    // Hae oppilaslista tietokannasta
+    $sql = "SELECT name FROM oppilaslista ORDER BY name ASC";
+    $result = $conn->query($sql);
+
+    if ($result && $result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
+        }
+    } else {
+        echo "<option value=''>Ei oppilaita tietokannassa</option>";
+    }
+    ?>
+</select>
+<p></p>
+
+                <label for="muutatietoa">Muuta tietoa:</label>
+                <input type="text" name="muutatietoa" id="muutatietoa" placeholder="Lisää tiedot"><p>
+            </fieldset>
+
+            <fieldset>
+               <legend>Työharjoittelupaikan tiedot</legend>
+                <!--<label for="tyo">Harjoittelupaikan nimi:</label>
+                <input type="text" name="tyo" id="tyo" placeholder="Tietoa paikasta">-->
+                <label for="tyo">Harjoittelupaikan nimi:</label>
+                <select name="tyo" id="tyo">
+                <option value="">-- Valitse harjoittelupaikka --</option>
+                <?php
+                // Hae harjoittelupaikat tietokannasta
+                $sql = "SELECT name FROM tyopaikat ORDER BY name ASC";
+                $result = $conn->query($sql);
+
+                if ($result && $result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                    echo "<option value='" . htmlspecialchars($row['name']) . "'>" . htmlspecialchars($row['name']) . "</option>";
+                }   echo '<li><a href="tyopaikat.php">Harjoittelupaikat</a></li>';
+                } else {
+                    echo "<option value=''>Ei paikkoja tietokannassa</option>";
+                }
+                ?>
+                </select>
+
+                <p><label for="tyo">Työpaikkaohjaja:</label>
+                <input type="text" name="ohjaaja" id="ohjaaja" placeholder="Ohjaajan nimi"><p>
+                <label for="tyo">Työpaikkaohjaja yhteystiedot:</label>
+                <input type="text" name="ohjaajayhteystiedot" id="ohjaajayhteystiedot" placeholder="ohjaja@tyopaikka.fi tai puhelin numero"><p>
+                <label for="alkaa">Harjoittelu alkaa:</label>
+                <input type="date" name="alkaa" id="alkaa"><p>
+                <label for="loppuu">Harjoittelu loppuu:</label>
+                <input type="date" name="loppuu" id="loppuu"> 
+            </fieldset>
+            
+            <fieldset>
+                <legend>Muuta</legend>
+                <label for="ruokaraha">Maksetaan ruokaraha:</label>
+                <select name="ruokaraha" id="ruokaraha">
+                <option select value="ei">Ei</option>
+                <option select value="kyllä">Kyllä</option>
+                </select>
+
+                <label for="status">Status:</label>
+                <select name="status" id="status">
+                <option select value="ei viela paikka">Ei vielä paikkaa</option>
+                <option select value="hakee">Hakee</option>
+                <option select value="loytynyt">Paikaa löytynyt</option>
+                </select>
+            
+            </fieldset>
+            <input type="submit" value="Lähetä">
+        </form>
+    </main>
+
+    <footer>
+      <br>
+      <a href="https://www.kpedu.fi">KPEDU</a></p>
+      <a>Marina Yehereva</a></p>
+      <p>© 2025 Harjoittelupaikat</p>
+    </footer>
+</body>
+</html>

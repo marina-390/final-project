@@ -1,0 +1,68 @@
+<?php
+include "connect.php";
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Register</title>
+    <a href="Harjoitteluseuranta.php"><button>Etusivu</button></a><br>
+</head>
+<body>
+    <h2>Rekisteroidy</h2>
+<main>
+    
+    <form action="signup.php" method="post"><br>
+<fieldset>
+    
+        <tr>
+        <td><label>Sähkoposti</label></td><td><input type email name="username" required value="
+        <?php if (isset($_SESSION['email'])) { 
+            echo $_SESSION['email'];
+        }
+        ?>
+        "></td><p>
+        </tr>
+        <tr>
+        <td><label>Salasana</label></td><td><input type="password" title="8 merkkiä, väh yksi numero, yksi iso kirjä ja pieni kirjain" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" name="password" required></td><p>
+        </tr>
+        <tr>
+            <td><label>Salasana uudelleen</label></td><td><input type="password" title="8 merkkiä, väh yksi numero, yksi iso kirjä ja pieni kirjain" name="password2" required></td><p>
+        </tr>
+        <?php if (isset($_SESSION['tunnus']) && $_SESSION['role'] === 'opettaja'): ?>
+        <label for="role">Rooli</label><br>
+        <select id="role" name="role">
+          <option value="oppilas">Oppilas</option>
+          <option value="opettaja">Opettaja (admin)</option>
+        </select><br><br>
+      <?php else: ?>
+        <!-- normal users get role 'oppilas' by default; hidden field -->
+        <input type="hidden" name="role" value="oppilas">
+      <?php endif; ?>
+
+        
+</fielsset>
+</main>
+       <td><input type="submit" value="Rekisteroidy"></td>
+        
+    </form>
+    <?php
+    if (isset($_SESSION['warning'])){
+        echo '<style>';
+        echo '.varoitus { color:red; }';
+        echo '</style>';
+        echo "<div class='varoitus'>" . $_SESSION['warning'] . "</div>";
+        unset($_SESSION['warning']);
+    }
+
+    ?>
+     <footer>
+      <br>
+      <a href="https://www.kpedu.fi">KPEDU</a></p>
+      <a>Marina Yehereva</a></p>
+      <p>© 2025 Harjoittelupaikat</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<?php
+include "connect.php";
+?>
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Harjoitteluseuranta</title>
+  <a href="Harjoitteluseuranta.php"><button>Etusivu</button></a>
+  <a href="register.php"><button>Register</button></a><br>
+</head>
+<body>
+
+  <h2>Harjoittelupaikat</h2>
+  
+
+  
+  
+    <main>
+        <form method="POST" action="actionpage.php">
+       <fieldset>
+                <legend>Kirjaudu</legend>
+                <label for="nimi">Tunnus(pakollinen):</label>
+                <input type="text" name="tunnus" id="tunnus" placeholder="tunnus" required>
+                <label for="salasana">Salasana(pakollinen):</label>
+                <input type="password" name="salasana" id="salasana" required>
+                <tr>
+                <td><label>Rooli</label></td>
+                <td>
+                <select name="role" required>
+                <option value="oppilas">Oppilas</option>
+                <option value="opettaja">Opettaja</option>
+                </select>
+                </td>
+                </tr>
+                <p>
+
+        </fieldset> 
+            <input type="submit" value="Kirjaudu">
+    
+
+    </main>
+
+
+    <footer>
+      <br>
+      <a href="https://www.kpedu.fi">KPEDU</a></p>
+      <a>Marina Yehereva</a></p>
+      <p>© 2025 Harjoittelupaikat</p>
+    </footer>
+</body>
+</html>
+

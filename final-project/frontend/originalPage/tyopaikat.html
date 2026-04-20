@@ -1,0 +1,53 @@
+<?php
+include "connect.php";
+if (isset($_SESSION['tunnus'])) {
+?>
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Harjoitteluseuranta</title>
+  <a href="Harjoitteluseuranta.php"><button>Etusivu</button></a><br>
+</head>
+<body>
+
+  <h2>Harjoittelupaikat</h2>
+
+  <ul>
+    <li><a href="kirjaudu.php">Kirjaudu sisään</a></li>
+    <li><a href="tyopaikat.php">Harjoittelupaikat</a></li>
+    <li><a href="lisaauusiopiskelija.php">Lisää uusi opiskelija</a></li><br>
+
+  
+    <main>
+        <form method="POST" action="actionpage.php">
+        <fieldset>
+               <legend>Työharjoittelupaikan tiedot</legend>
+                <label for="tyo">Harjoittelupaikan nimi:</label>
+                <input type="text" name="tyo" id="tyo" placeholder="Tietoa paikasta"><p>
+                <label for="tyo">Yhteystiedot:</label>
+                <input type="text" name="yhteystiedot" id="yhteystiedot" placeholder="ohjaja@tyopaikka.fi tai puhelin numero"><p>
+                <label for="tyo">Osoite:</label>
+                <input type="text" name="osoite" id="osoite"><p>
+                <label for="muutatietoa">Muuta tietoa:</label>
+                <input type="text" name="muutatietoa" id="muutatietoa" placeholder="Lisää tiedot">
+            </fieldset>
+        <input type="submit" value="Lähetä">
+
+    </main>
+    <br>
+    <footer>
+      <br>
+      <a href="https://www.kpedu.fi">KPEDU</a></p>
+      <a>Marina Yehereva</a></p>
+      <p>© 2025 Harjoittelupaikat</p>
+    </footer>
+</body>
+</html>
+<?php
+} else {
+    header("location:Harjoitteluseuranta.php");
+}

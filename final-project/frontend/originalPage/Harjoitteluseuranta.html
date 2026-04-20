@@ -1,0 +1,99 @@
+<?php
+include "connect.php";
+
+if (isset($_SESSION['tunnus'])) {
+    echo "Tervetuloa <b> " . $_SESSION['tunnus'] . "<b>";
+}
+?>
+
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css">
+  <title>Harjoitteluseuranta</title>
+  
+</head>
+<body>
+
+  <h2>Harjoittelupaikat</h2>
+
+  <ul>
+    <li><a href="tyopaikat.php">Harjoittelupaikat</a></li>
+    <?php
+    if (isset($_SESSION['tunnus'])) {
+        echo "<li><a href='logout.php'>Kirjaudu ulos</a></li>";
+
+    } else {
+        echo '<li><a href="kirjaudu.php">Kirjaudu sisään</a></li>';
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['tunnus'])) {
+    echo '<li><a href="lisaauusiopiskelija.php">Lisää uusi opiskelija</a></li>';
+    }
+    ?>
+    <?php
+    if (isset($_SESSION['tunnus'])) {
+    echo '<li><a href="tyolista.php">Työpaikkalista</a></li>';
+    }
+    ?>
+  </ul>
+  <br>
+<main>
+    <?php
+    if (isset($_SESSION['tunnus'])) {
+        ?>
+<div class="table-container">
+    <table id="myTable" style="width:100%">
+
+    <tr>
+      <th>Oppilas</th>
+      <th>Harjoittelupaikka</th>
+      <th>Ohjaaja</th>
+      <th>Yhteystiedot</th>
+      <th>Aloitus</th>
+      <th>Lopetus</th>
+      <th>Status</th>
+      <th>Ruokaraha</th>
+      <th>Muuta</th>
+    </tr>
+        <?php
+          include "luku.php";
+        ?>
+        
+    </table>
+</div>
+    <?php
+    }
+    ?>
+</main>
+    <footer>
+      <br>
+      <a href="https://www.kpedu.fi">KPEDU</a></p>
+      <a>Marina Yehereva</a></p>
+      <p>© 2025 Harjoittelupaikat</p>
+    </footer>
+
+   <script>
+document.addEventListener("DOMContentLoaded", function() {
+  const statusSelect = document.getElementById("status");
+
+  function updateColor() {
+    //statusSelect.classList.remove("status-ei", "status-hakee", "status-loytynyt");
+    if (statusSelect.value === "ei viela paikka") statusSelect.classList.add("status-ei");
+    else if (statusSelect.value === "hakee") statusSelect.classList.add("status-hakee");
+    else if (statusSelect.value === "loytynyt") statusSelect.classList.add("status-loytynyt");
+  }
+
+  statusSelect.addEventListener("change", updateColor);
+  updateColor(); // set initial color
+});
+</script>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,89 @@
+<?php
+include 'connect.php';
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Muokkaa</title>
+</head>
+<body>
+    <main>
+        <fieldset>
+            <legend>Muokkaus</legend>
+        <?php
+        $id = $_POST['id'];
+
+
+        $sql = "SELECT * FROM oppilas WHERE id = '$id'";
+        $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+
+                    $nimi = $row['nimi'];
+                    $muutatiedot = $row['muutatiedot'];
+                    $tyo = $row['paikka']; 
+                    $ohjaaja = $row['ohjaaja'];
+                    $ohjaajayhteystiedot = $row['yhteystiedot'];
+                    $alkaa = $row['aloitus'];
+                    $loppuu = $row['lopetus'];
+                    $status = $row['status'];
+                    $ruokaraha = $row['ruokaraha'];
+                    $muutatietoa = $row['muuta'];
+
+                    echo "<form action='paivita.php' method='POST'>";
+
+                    echo "<input type='hidden' name='id' value=$id>";
+
+                    echo "Nimi: <input type='text' name='nimi' value='"; echo $nimi; echo "' required><br>";
+
+        
+                    echo "Harjoittelupaikka: <select name='tyo' required>";
+
+                    $sqlTyot = "SELECT name FROM tyopaikat ORDER BY name ASC";
+                    $resultTyot = $conn->query($sqlTyot);
+
+                    if ($resultTyot->num_rows > 0) {
+                        while ($tyoRow = $resultTyot->fetch_assoc()) {
+                            $paikka = $tyoRow['name'];
+                            $selected = ($paikka == $tyo) ? 'selected' : '';
+                            echo "<option value='$paikka' $selected>$paikka</option>";
+                        }
+                        } else {
+                        echo "<option value=''>Ei paikkoja tietokannassa</option>";
+                    }
+                        echo "</select><br>";
+
+        
+                        echo "Ohjaaja: <input type='text' name='ohjaaja' value='"; echo $ohjaaja;  echo "'><br>";
+                        echo "Ohjaajayhteystiedot: <input type='text' name='ohjaajayhteystiedot' value='"; echo $ohjaajayhteystiedot; echo "'><br>";
+                        echo "alkaa: <input type='date' name='alkaa' value='"; echo $alkaa; echo "' required><br>";
+                        echo "loppuu: <input type='date' name='loppuu' value='"; echo $loppuu; echo "' required><br>";
+
+                        echo "Status: <select name='status' required>";
+                        echo "<option value='ei paikka' " . ($status == 'ei paikka' ? 'selected' : '') . ">Ei vielä paikka</option>";
+                        echo "<option value='etsin' " . ($status == 'etsin' ? 'selected' : '') . ">Etsin paikka</option>";
+                        echo "<option value='loytynyt' " . ($status == 'loytynyt' ? 'selected' : '') . ">Paikka löytynyt</option>";
+                        echo "</select><br>";
+
+                        echo "Ruokaraha: <select name='ruokaraha' required>";
+                        echo "<option value='ei' " . ($ruokaraha == 'ei' ? 'selected' : '') . ">Ei</option>";
+                        echo "<option value='kyllä' " . ($ruokaraha == 'kyllä' ? 'selected' : '') . ">Kyllä</option>";
+                        echo "</select><br>";
+
+                        echo "Muuta tietoa: <input type='text' name='muutatietoa' value='{$muutatietoa}'><br>";
+                    }   
+                }
+        ?>
+        </fieldset>
+    </main>
+</body>
+</html>
+<?php
+echo "<input type='submit' value='Tallenna muutokset'>";
+?>
+
+

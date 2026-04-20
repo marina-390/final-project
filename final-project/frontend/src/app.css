@@ -1,0 +1,241 @@
+:root {
+  --bg: #0b1220;
+  --card: #f7faff; /* light nice color (avoid pure white) */
+  --text: #0f172a;
+  --muted: #475569;
+  --border: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.25);
+  --shadow: 0 12px 30px rgba(2, 6, 23, 0.12);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --accent: #3b82f6;
+  --accent-2: #22c55e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, 'Apple Color Emoji', 'Segoe UI Emoji';
+  color: var(--text);
+  background: radial-gradient(1200px 800px at 20% 0%, #1d4ed8 0%, transparent 55%),
+    radial-gradient(900px 600px at 90% 10%, #0ea5e9 0%, transparent 55%),
+    var(--bg);
+}
+
+.page {
+  max-width: 980px;
+  margin: 22px auto;
+  padding: 0 14px 40px;
+}
+
+/* Card layout around each page section */
+.page > * {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 18px 18px 22px;
+}
+
+h2 {
+  margin: 0 0 12px;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+}
+
+ul {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul li {
+  margin: 4px 0;
+}
+
+nav {
+  margin: 6px 0 12px;
+}
+
+nav a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Main menu (the <ul> right after <h2>) */
+.page > ul {
+  margin: 6px 0 10px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.page > ul > li {
+  margin: 0;
+}
+
+.page > ul > li > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid #c7d2fe; /* light grey-blue border */
+  background: #edf2ff; /* light grey-blue pill */
+  color: #334155; /* slate text */
+  font-weight: 800;
+}
+
+.page > ul > li > a:hover {
+  background: #dbeafe; /* slightly darker on hover */
+  border-color: #93c5fd;
+  text-decoration: none;
+}
+
+.page > ul > li > a:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 2px;
+}
+
+button {
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: #0f172a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  font-weight: 600;
+  transition: transform 0.06s ease, background 0.2s ease,
+    border-color 0.2s ease;
+}
+
+button:hover {
+  background: #eef2ff;
+  border-color: var(--border-strong);
+}
+
+button:active {
+  transform: translateY(1px);
+}
+
+button:focus-visible {
+  outline: 3px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 2px;
+}
+
+/* Tables */
+.table-container {
+  overflow-x: auto;
+  margin: 8px 0 0;
+  border-radius: var(--radius-sm);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 680px;
+}
+
+th,
+td {
+  padding: 10px 10px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* Keep original “status colors” but make them feel modern */
+.status-ei,
+.status-hakee,
+.status-loytynyt {
+  font-weight: 700;
+  border-radius: 12px;
+}
+
+.status-ei {
+  background-color: #fda4af;
+}
+
+.status-hakee {
+  background-color: #fde047;
+}
+
+.status-loytynyt {
+  background-color: #86efac;
+}
+
+/* Forms */
+form {
+  margin: 0;
+}
+
+label {
+  font-weight: 600;
+  color: var(--muted);
+}
+
+input,
+select,
+textarea {
+  font: inherit;
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #f7faff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: rgba(59, 130, 246, 0.55);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+}
+
+fieldset {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 14px 16px;
+  margin: 12px 0;
+}
+
+legend {
+  padding: 0 8px;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.varoitus {
+  color: #dc2626;
+  margin: 10px 0;
+  font-weight: 700;
+}
+
+footer {
+  text-align: center;
+  margin-top: 16px;
+  color: var(--muted);
+}
+
